@@ -13,20 +13,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var pantalla: UILabel!
     @IBOutlet weak var miniPantalla: UILabel!
     
+    //DECLARACION DE VARIABLES
     var elUsuarioEstaEnMedioDeLaEscrituraDeNumero : Bool = false
-    
     var imposible : Bool = false
     var operando1 : Double = 0
     var operando2 : Double = 0
     var operacion : String = ""
+    var boton : UIButton = UIButton()
     
+    //Se llama a esta funcion cuando le das al boton "="
     @IBAction func enterPulsado() {
-         let numero : NSString = pantalla.text! as NSString
+        let numero : NSString = pantalla.text! as NSString
         operando2 = numero.doubleValue
         
         let resultado = realizaOperacion()
         
+        //Vuelve a poner el boton original del boton
+        boton.backgroundColor = UIColor(red: 255/255, green: 47/255, blue: 34/255, alpha: 1.0)
+        
         pantalla.text = String (format: "%g", resultado)
+        
     }
     
     
@@ -34,7 +40,9 @@ class ViewController: UIViewController {
         let numero : NSString = pantalla.text! as NSString
         operando1 = numero.doubleValue
         
-        
+        //Cambio el color del boton al pulsarlo
+        boton = sender
+        boton.backgroundColor = UIColor.orange
         //Guardo la operacion pulsada
         operacion = sender.currentTitle!
         miniPantalla.text = pantalla.text
@@ -43,6 +51,7 @@ class ViewController: UIViewController {
         elUsuarioEstaEnMedioDeLaEscrituraDeNumero = false
     }
     
+    //Funciones en las quer solo se realiza con un solo operando
     @IBAction func operacionDeSoloUnOperando(_ sender: UIButton) {
         let numero : NSString = pantalla.text! as NSString
         operando1 = numero.doubleValue
@@ -84,13 +93,7 @@ class ViewController: UIViewController {
             print("Paso por aqui")
             let index = aux?.index((aux?.startIndex)!, offsetBy: 1)
             
-        
-            
             pantalla.text = aux?.substring(from: index!)
-        
-            
-            
-            
         }
         
     }
